@@ -24,3 +24,9 @@ li { margin: 6px 0; }
 .footer { margin-top: 48px; color: var(--muted); font-size: 15px; }
 .home { padding-top: 15vh; }
 .home h1 { font-size: 40px; margin-bottom: 16px; }
+.invite { text-align: center; padding-top: 10vh; }
+.club-logo { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; margin-bottom: 16px; }
+.button { display: block; margin: 12px auto 0; max-width: 340px; padding: 15px 20px; border-radius: 999px; background: var(--green); color: #fff; font-weight: 600; text-decoration: none; }
+.button.secondary { background: #fff; color: var(--ink); border: 1px solid #cfe0d7; }
+.note { color: var(--muted); font-size: 15px; margin-top: 20px; }
+[hidden] { display: none !important; }

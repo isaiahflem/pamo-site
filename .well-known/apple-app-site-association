@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["AW4YBFXZ94.com.isaiahflem.pamo.dev"],
+        "components": [{ "/": "/join*" }]
+      }
+    ]
+  }
+}

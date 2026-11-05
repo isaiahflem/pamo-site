@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join a run club on Pamo</title>
+<meta property="og:title" content="Join my run club on Pamo">
+<meta property="og:description" content="Run together. Go further. RSVP to group runs and keep up with your crew.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="invite">
+<p class="brand"><a href="/">pamo</a></p>
+<img id="logo" class="club-logo" alt="" hidden>
+<h1 id="title">Join a run club on Pamo</h1>
+<p>Pamo is where your club plans runs, RSVPs, and keeps up with each other. Run together. Go further.</p>
+<a id="open" class="button" hidden>Open in Pamo</a>
+<a id="get" class="button secondary" href="https://testflight.apple.com/join/FnYPX5Qj">Get the app</a>
+<p class="note">Pamo is in testing on iPhone. "Get the app" installs it through Apple's TestFlight.</p>
+<p class="footer"><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a> · <a href="/support">Support</a></p>
+</main>
+<script>
+// Only the club's name and logo are public; everything else needs an account.
+const club = new URLSearchParams(location.search).get('club');
+if (club && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(club)) {
+  const open = document.getElementById('open');
+  open.href = 'pamo://join?club=' + club;
+  open.hidden = false;
+  fetch('https://jnqumrytjtmkhabtaefy.supabase.co/rest/v1/rpc/club_invite_preview', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', apikey: 'sb_publishable_6j8VwsCxcrP1tK5oRTxqBQ_deRT_pKi' },
+    body: JSON.stringify({ p_club: club }),
+  })
+    .then((r) => r.json())
+    .then((rows) => {
+      const c = rows && rows[0];
+      if (!c) return;
+      document.getElementById('title').textContent = 'Join ' + c.name + ' on Pamo';
+      document.title = 'Join ' + c.name + ' on Pamo';
+      if (c.logo_url) {
+        const logo = document.getElementById('logo');
+        logo.src = c.logo_url;
+        logo.hidden = false;
+      }
+    })
+    .catch(() => {});
+}
+</script>
+</body>
+</html>
